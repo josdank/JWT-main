@@ -32,6 +32,13 @@
       "price": "30",
       "imagen": "https://res.cloudinary.com/dgoncoopf/image/upload/v1732562477/tours/xcqnoqatkgfl0ssfakou.jpg",
       "public_id": "tours/xcqnoqatkgfl0ssfakou"
+    },
+    {
+      "id": "e6ea8ef1-fd84-4222-b0f5-82d6b44af639",
+      "name": "Tour-Salinas",
+      "price": "50",
+      "imagen": "https://res.cloudinary.com/dgoncoopf/image/upload/v1732563750/tours/eakrbkt4qxnhmbcizzwf.jpg",
+      "public_id": "tours/eakrbkt4qxnhmbcizzwf"
     }
   ],
   "users": [

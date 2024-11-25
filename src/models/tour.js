@@ -1,15 +1,25 @@
+
+import dotenv from 'dotenv';
+
+dotenv.config()
+
+
 const tourModel ={
 
     async getAllToursModel(){
-        const peticion = await fetch('http://localhost:4000/tours')
+     try{
+        const peticion = await fetch(process.env.URL_BDD_TOURS)
         const tours = await peticion.json()
         return tours
+        } catch (error){
+        console.log(error);
+        }
     }
     ,
 
 
     async getTourByIdModel(tourId) {
-        const response = await fetch(`http://localhost:4000/tours/${tourId}`);
+        const response = await fetch(`${process.env.URL_BDD_TOURS}${tourId}`);
         if (!response.ok) {
             return {error:"Tour no encontrado"}
         }
@@ -18,7 +28,10 @@ const tourModel ={
     },
 
     async createTourModel(newTour){
-        const url = "http://localhost:4000/tours"
+        console.log(process.env.URL_BDD_TOURS);
+        
+
+        const url = process.env.URL_BDD_TOURS
         const peticion  = await fetch(url,{
             method:'POST',
             body:JSON.stringify(newTour),
@@ -32,7 +45,7 @@ const tourModel ={
 
     async updateTourModel(tourId,updateTourModel){
         // CONEXIÓN A BDD
-        const url = `http://localhost:4000/tours/${tourId}`
+        const url = `${process.env.URL_BDD_TOURS}${tourId}`
         // ENVIAR INFO A BDD
         const peticion = await fetch(url,{
             method:"PUT",
@@ -49,7 +62,7 @@ const tourModel ={
 
     async deleteTourModel(tourId){
         // CONEXIÓN A BDD
-        const url = `http://localhost:4000/tours/${tourId}`
+        const url = `${process.env.URL_BDD_TOURS}/${tourId}`
         // ENVIAR INFO A BDD
         const peticion = await fetch(url,{
             method:"DELETE"
@@ -64,7 +77,7 @@ const tourModel ={
 
 
     async getTourByID(tourId){
-        const peticion = await fetch(`http://localhost:4000/tours/${tourId}`)
+        const peticion = await fetch(`${process.env.URL_BDD_TOURS}${tourId}`)
         const data = await peticion.json()
         return data
     }
