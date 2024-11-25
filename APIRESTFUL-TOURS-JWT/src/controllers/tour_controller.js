@@ -4,6 +4,7 @@ import tourModel from '../models/tour.js'
 
 import {v4 as uuidv4} from 'uuid'
 
+import { v2 as cloudinary } from 'cloudinary'
 
 const getAllToursControllers = async(req,res) => {
     const tours = await tourModel.getAllToursModel()
@@ -24,11 +25,22 @@ const getAlltourControllerByID = async (req, res) => {
 
 
 const createTourController = async (req,res) => {
+    
     const newTourData = {
         id:uuidv4(),
         ...req.body
     }
+
+    // req.body req.params req.query req.header req.files
+
     try {
+
+        console.log(req.files.imagen.tempFilePath)
+        const cloudinaryResponse = await cloudinary.uploader.upload(req.files.imagen.tempFilePath, {folder: 'tours'})
+        
+        newTourData.imagen = cloudinaryResponse.secure_url
+        newTourData.public_id = cloudinaryResponse.public_id
+
         const tour = await tourModel.createTourModel(newTourData)
         res.status(201).json(tour)
     } catch (error) {

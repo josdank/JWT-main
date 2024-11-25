@@ -19,6 +19,12 @@ cloudinary.config({
     api_key: process.env.CLOUDINARY_API_KEY, 
     api_secret: process.env.CLOUDINARY_API_SECRET // Click 'View API Keys' above to copy your API secret
 });
+
+app.use(fileUpload({
+    useTempFiles :true,
+    tempFileDir : './uploads'
+}))
+
 // Variables 
 app.set('port', process.env.puertito || 3000)
 
